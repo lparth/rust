@@ -1,4 +1,4 @@
-// Copyright 2013-2014 The Rust Project Developers. See the COPYRIGHT
+// Copyright 2017 The Rust Project Developers. See the COPYRIGHT
 // file at the top-level directory of this distribution and at
 // http://rust-lang.org/COPYRIGHT.
 //
@@ -8,20 +8,9 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-// exec-env:RUST_LOG=logging_enabled=info
-// ignore-emscripten: FIXME(#31622)
-
-
-#![feature(rustc_private)]
-
-#[macro_use]
-extern crate log;
-
-pub fn main() {
-    if log_enabled!(log::DEBUG) {
-        panic!("what?! debugging?");
-    }
-    if !log_enabled!(log::INFO) {
-        panic!("what?! no info?");
-    }
+fn main() {
+    [0; ..10];
+    //~^ ERROR mismatched types
+    //~| expected type `usize`
+    //~| found type `std::ops::RangeTo<{integer}>`
 }
